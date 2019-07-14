@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import { ErrorHandler } from "./app.error-handler";
 import { errorHandler } from "@angular/platform-browser/src/browser";
+import { MenuItem } from "app/restaurant-detail/menu-item/menu-item.model";
 
 @Injectable()
 export class RestaurantsService {
@@ -35,5 +36,11 @@ export class RestaurantsService {
     }
 
     //Todos os métodos https, por realizarem uma requisição assincrona,ou seja, não sabe o tipo da request 
+
+    menuOfRestaurant(id:string): Observable<MenuItem[]> {
+        return this.http.get(`${MEAT_API}/restaurants/${id}/menu`)
+            .map(response => response.json())
+            .catch(ErrorHandler.handleError)
+    }
 
 }
