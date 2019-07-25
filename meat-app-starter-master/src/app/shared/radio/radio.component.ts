@@ -41,10 +41,8 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
     //Chamado sempre que o valor interno do componente muda
   }
   registerOnTouched(fn: any): void {
-    throw new Error("Method not implemented.");
   }
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error("Method not implemented.");
   }
 
 
