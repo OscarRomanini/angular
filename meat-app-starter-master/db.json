@@ -370,5 +370,49 @@
       "restaurantId": "tasty-treats"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "address": "Av. Tamandaré",
+      "number": "123",
+      "optional": "",
+      "paymentOption": "MONEY",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "cup"
+        },
+        {
+          "quantity": 1,
+          "menuId": "straw"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "address": "123123",
+      "number": "123123",
+      "optional": "",
+      "paymentOption": "MONEY",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "capp"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "address": "Av. Tamandaré",
+      "number": "111",
+      "optional": "",
+      "paymentOption": "CARD",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "zlasagna"
+        }
+      ],
+      "id": 3
+    }
+  ]
 }
