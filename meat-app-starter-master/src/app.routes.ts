@@ -10,7 +10,7 @@ import { OrderSummaryComponent } from 'app/order-summary/order-summary.component
 
 export const ROUTES:Routes = [
     {path: '', component: HomeComponent},
-    {path: 'about', component: AboutComponent},
+    {path: 'about', loadChildren: './about/about.module#AboutModule'},
     {path: 'restaurants', component: RestaurantsComponent},
     {path: 'restaurants/:id', component: RestaurantDetailComponent, children: [
         {path: '', redirectTo: 'menu', pathMatch: 'full'},
@@ -20,7 +20,4 @@ export const ROUTES:Routes = [
     {path: 'order', component: OrderComponent},
     {path: 'order-summary', component: OrderSummaryComponent},
     
-
-
-
 ]
