@@ -4,89 +4,113 @@
 
 <section class="content">
   <section class="invoice">
-<!-- 
+    <!-- 
       {{form.valid}}
       {{form.value | json}} -->
 
-        <form novalidate #form="ngForm">
-          <div class="row">
-            <div class="col-xs-12">
-              <h2 class="page-header">
-                <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
-              </h2>
-            </div>
-          </div>                
+    <form novalidate [formGroup]="orderForm">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
+          </h2>
+        </div>
+      </div>
 
-          <div class="row invoice-info">
-            <div class="col-xs-12">
-              <p class="lead">Endereço de Entrega:</p>
-            </div>
+      <div class="row">
+        <div class="col-xs-9">
+          <p class="lead">Seus dados:</p>
+        </div>
+      
+        <div class="row ">
+          <div class="col-xs-12 col-sm-3 has-error-block">
+            <span class="help-block pull-right" *ngIf="orderForm.hasError('emailsNotMatch')"><i class="fa fa-check"></i> E-mails não conferem</span>
+          </div>
+        </div>
+
+      <div class="col-sm-6 col-xs-10 ">
+        <mt-input errorMessage="Campo obrigatório e no mínimo 5 caracteres" label="Nome">
+          <input class="form-control" placeholder="Nome" formControlName="name">
+        </mt-input>
+      </div>
+
+      <div class="col-sm-3 col-xs-12">
+        <mt-input errorMessage="e-mail inválido" label="email">
+          <input class="form-control" placeholder="E-mail" formControlName="email">
+        </mt-input>
+      </div>
+
+      <div class="col-sm-3 col-xs-12">
+        <mt-input errorMessage="Confirmação necessária" label="Confirme o e-mail">
+          <input class="form-control" placeholder="Confirme o e-mail" formControlName="confirmEmail">
+        </mt-input>
+      </div>
+
+    </div>
+
+      <div class="row ">
+        <div class="col-xs-12">
+          <p class="lead">Endereço de Entrega:</p>
+        </div>
 
         <div class="col-sm-6 col-xs-12">
           <mt-input errorMessage="Campo obrigatório e no mínimo 5 caracteres" label="Endereço">
-            <input class="form-control" placeholder="Endereço" name="address" ngModel required minlength="5">
+            <input class="form-control" placeholder="Endereço" formControlName="address">
           </mt-input>
         </div>
 
         <div class="col-sm-2 col-xs-6">
-         <mt-input errorMessage="Campo obrigatório e somente números" label="Número">
-          <input class="form-control" placeholder="Número" pattern="^[0-9]*$" name="number" ngModel required>
-         </mt-input>
+          <mt-input errorMessage="Campo obrigatório e somente números" label="Número">
+            <input class="form-control" placeholder="Número" formControlName="number" >
+          </mt-input>
         </div>
 
         <div class="col-sm-4 col-xs-6">
-         <mt-input label="Complemento">
-          <input class="form-control" placeholder="Complemento" name="optional" ngModel>
-         </mt-input>
+          <mt-input label="Complemento">
+            <input class="form-control" placeholder="Complemento" formControlName="optional">
+          </mt-input>
         </div>
 
       </div>
 
-          <div class="row">
-            <div class="col-xs-12">
-              <p class="lead">Itens do Pedido:</p>
-            </div>
-            <mt-order-items [items]="cartItems()"
-              (increaseQty)="increaseQty($event)"
-              (decreaseQty)="decreaseQty($event)"
-              (remove)="remove($event)"
-            ></mt-order-items>
-          </div>
-          <!-- /.row -->
-
-          <div class="row">
-            <!-- accepted payments column -->
-            <div class="col-sm-6 col-xs-12">
-              <p class="lead">Formas de Pagamento:</p>
-
-                <div class="form-group">
-                   
-                  <mt-radio required [options]="paymentOptions" name="paymentOption" ngModel></mt-radio>
-
-                </div>
-
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-6 col-xs-12">
-                <p class="lead">Frete e Total:</p>
-            <mt-delivery-costs
-              [delivery]="delivery"
-              [itemsValue]="itemsValue()"
-            ></mt-delivery-costs>
-          
-          </div>
-          <!-- /.col -->
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="lead">Itens do Pedido:</p>
         </div>
-        
-        </form>
+        <mt-order-items [items]="cartItems()" (increaseQty)="increaseQty($event)" (decreaseQty)="decreaseQty($event)"
+          (remove)="remove($event)"></mt-order-items>
+      </div>
+      <!-- /.row -->
 
-        <div class="row">
-          <div class="col-xs-12">
-            <button (click)="checkOrder(form.value)" [disabled]="!form.valid || cartItems().length === 0" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
-            </button>
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-sm-6 col-xs-12">
+          <p class="lead">Formas de Pagamento:</p>
+
+          <div class="form-group">
+            <mt-radio [options]="paymentOptions" formControlName="paymentOption"></mt-radio>
           </div>
-        </div>
 
-    </section>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6 col-xs-12">
+          <p class="lead">Frete e Total:</p>
+          <mt-delivery-costs [delivery]="delivery" [itemsValue]="itemsValue()"></mt-delivery-costs>
+
+        </div>
+        <!-- /.col -->
+      </div>
+
+    </form>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <button (click)="checkOrder(orderForm.value)" [disabled]="!orderForm.valid || cartItems().length === 0"
+          class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
+        </button>
+      </div>
+    </div>
+
+  </section>
 </section>
 <!-- FIM DO CONTEUDO-->
