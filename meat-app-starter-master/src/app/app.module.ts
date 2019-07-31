@@ -18,6 +18,7 @@ import { OrderModule } from './order/order.module';
 import {FormsModule} from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { RatingComponent } from './shared/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     MenuItemComponent,
     ReviewsComponent,
     OrderSummaryComponent
+    OrderSummaryComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
