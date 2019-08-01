@@ -17,7 +17,6 @@ export class OrderComponent implements OnInit {
   orderForm: FormGroup;
   delivery: number = 8;
 
-
   paymentOptions: RadioOptionModel[] = [
     { label: 'Dinheiro', value: 'MONEY' },
     { label: 'Cartão de crédito', value: 'CARD' },
