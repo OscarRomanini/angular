@@ -17,6 +17,9 @@ import {FormsModule} from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { RatingComponent } from './shared/rating/rating.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NotFoundComponent } from './not-found/not-found.component'
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,16 +35,18 @@ import { RatingComponent } from './shared/rating/rating.component';
     ReviewsComponent,
     OrderSummaryComponent,
     OrderSummaryComponent,
-    RatingComponent
+    RatingComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    BrowserAnimationsModule,
     FormsModule,
     SharedModule.forRoot(), //Shared module + providers (Core se torna obsoleto)
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}) //pré carregamento dos módulos
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,7 @@ import { RestaurantDetailComponent } from 'app/restaurant-detail/restaurant-deta
 import { MenuComponent } from 'app/restaurant-detail/menu/menu.component';
 import { ReviewsComponent } from 'app/restaurant-detail/reviews/reviews.component';
 import { OrderSummaryComponent } from 'app/order-summary/order-summary.component';
+import { NotFoundComponent } from 'app/not-found/not-found.component';
 
 export const ROUTES:Routes = [
     {path: '', component: HomeComponent},
@@ -16,7 +17,8 @@ export const ROUTES:Routes = [
         {path: 'menu', component: MenuComponent},
         {path: 'reviews', component: ReviewsComponent}
     ]},
-    {path: 'order-summary', component: OrderSummaryComponent}
+    {path: 'order-summary', component: OrderSummaryComponent},
+    {path: '**', component: NotFoundComponent} //chamada de wildcart
 
     
 ]

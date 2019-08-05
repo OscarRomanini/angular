@@ -1,7 +1,13 @@
 import { CartItem } from "./cart-item.model";
 import { MenuItem } from "../menu-item/menu-item.model";
+import { Injectable } from "@angular/core";
+import { NotificationsService } from "app/shared/messages/notifications.service";
+
+@Injectable() //O serviço que vai receber outro serviço precisa do decorator @injectable
 
 export class ShoppingCartService {
+
+    constructor(public notificationsService: NotificationsService) {}
 
     items: CartItem[] = [];
 
@@ -14,12 +20,13 @@ export class ShoppingCartService {
         }else {
             this.items.push(new CartItem(item));
         }
-        console.log(item)
+        this.notificationsService.notify(`Você adicionou o item ${item.name}`);
     }
 
     removeItem(item: CartItem) {
         this.items.splice(this.items.indexOf(item), 1);
         //Remove um elemento a partir do indice encontrado no item que foi passado.
+        this.notificationsService.notify(`Você removeu o item ${item.menuItem.name}`);
     }
 
     total(): number {

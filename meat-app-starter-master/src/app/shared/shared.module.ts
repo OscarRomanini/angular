@@ -6,11 +6,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { OrderService } from 'app/order/order-items/order.service';
 import { RestaurantsService } from 'app/restaurants/restaurants.service';
 import { ShoppingCartService } from 'app/restaurant-detail/shopping-cart/shopping-cart.service';
+import { SnackbarComponent } from './messages/snackbar/snackbar.component';
+import { NotificationsService } from './messages/notifications.service';
 
 @NgModule({
-    declarations: [InputComponent, RadioComponent],
+    declarations: [InputComponent, RadioComponent, SnackbarComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule],
-    exports: [InputComponent, RadioComponent, CommonModule, FormsModule, ReactiveFormsModule]
+    exports: [InputComponent, RadioComponent, CommonModule, FormsModule, ReactiveFormsModule, SnackbarComponent]
 })
 
 export class SharedModule {
@@ -18,7 +20,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ShoppingCartService, RestaurantsService, OrderService]
+            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationsService]
         }
     }
 }
