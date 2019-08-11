@@ -46,7 +46,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     SharedModule.forRoot(), //Shared module + providers (Core se torna obsoleto)
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}) //pré carregamento dos módulos
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
